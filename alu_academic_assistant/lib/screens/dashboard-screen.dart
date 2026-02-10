@@ -4,7 +4,7 @@ import '../models/assignment.dart';
 import '../models/session.dart';
 import '../logic/schedule_logic.dart';
 import '../utils/helpers.dart';
-import '../widgets/hoverable_card.dart';
+import '../widget/hoverable_card.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
