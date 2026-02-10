@@ -1,4 +1,132 @@
 # ALU Academic Assistant
+A comprehensive Flutter mobile application designed to help African Leadership
+University (ALU) students manage their academic responsibilities. The app helps
+students track assignments, schedule sessions, monitor attendance, and manage
+other academic tasks.
+
+## Project Overview
+
+Core features:
+- Dashboard: Real-time overview of academic status and commitments
+- Assignment Management: Create, track, and manage coursework
+- Schedule Management: Plan academic sessions and track attendance
+
+## Features
+
+- Login and Sign-up flows (mocked backend via `AuthService`).
+- Persistent login state using `shared_preferences`.
+- Bottom navigation with Dashboard, Assignments and Schedule.
+- Reusable UI utilities and services.
+
+## Architecture
+
+- `lib/screens/` — routeable screens and top-level UI pages.
+- `lib/navigations/` — navigation widgets (bottom nav).
+- `lib/services/` — business logic and external integrations (auth, storage).
+- `lib/utils/` — shared constants and helpers (colors, styles).
+- `lib/widgets/` — reusable UI components (form fields, buttons).
+
+Design choices:
+- Clear separation between UI and service logic ensures testability.
+- Small, focused widgets increase reusability across screens.
+
+## Setup
+
+Prerequisites
+- Flutter SDK (version 3.0 or higher)
+- Dart (included with Flutter)
+- An IDE (VS Code, Android Studio, or Xcode)
+- Android Emulator or iOS Simulator (or a physical device)
+
+Installation & Setup
+1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd alu_academic_assistant
+```
+2. Install dependencies
+
+```bash
+flutter pub get
+```
+3. Run the application
+
+```bash
+flutter run
+```
+
+## Component Documentation (summary)
+
+The codebase is modular. Example components:
+- Assignment model and add/edit screen (in `lib/models/` and `lib/screens/`).
+- Schedule and attendance logic in `lib/logic/` and relevant models.
+
+Refer to inline comments and the `lib/` folder for file-level documentation.
+
+## Color Scheme & Branding
+
+Use `lib/utils/alu_colors.dart` for consistent ALU colors:
+
+```dart
+// Primary Colors
+// Primary Dark: #001F3F (Navy Blue)
+// Accent Yellow: #FDB827 (Gold)
+// Warning Red: #DC3545 (Danger/Alerts)
+
+// Text Colors
+// White: #FFFFFF
+// Gray: #B0B0B0
+
+// Status Colors
+// Success Green: #28A745
+// Info Blue: #17A2B8
+
+## Contribution Guidelines
+
+- Use feature branches and include meaningful commit messages.
+- Keep widget methods small and prefer composition over large widgets.
+- Document non-obvious design decisions with inline comments.
+
+## Development & Testing
+
+```bash
+# Install deps
+flutter pub get
+
+# Analyze code
+flutter analyze
+
+# Run tests
+flutter test
+
+# Run app
+flutter run
+```
+
+## Future Enhancements
+
+- SQLite implementation for advanced persistence
+- Push notifications for assignment reminders
+- Cloud synchronization across devices
+- Replace mock `AuthService` with real backend integration
+
+## License
+
+This project is created for educational purposes at African Leadership University.
+
+---
+If you'd like, I can further:
+- Run `flutter analyze` and fix warnings.
+- Refactor navigation to named routes and add unit/widget tests.
+# ALU Academic Assistant
+<<<<<<< HEAD
+
+This repository contains the ALU Academic Assistant — a Flutter demo app that
+provides basic student-facing features such as authentication, a dashboard,
+assignments and schedule screens. The project is structured for collaboration
+and maintainability.
+=======
 
 A comprehensive Flutter mobile application designed to help African Leadership University (ALU) students manage their academic responsibilities. The app assists students in tracking assignments, scheduling academic sessions, monitoring attendance, and maintaining overall academic engagement throughout the semester.
 
@@ -10,9 +138,57 @@ The ALU Academic Assistant is a personal academic management tool that integrate
 - **Schedule Management**: Plan academic sessions and track attendance
 
 
+>>>>>>> 0a9c706323e33767eb98faefbafff6f7ee0d901a
 
-## Getting Started
+## Features
 
+<<<<<<< HEAD
+- Login and Sign-up flows (mocked backend via `AuthService`).
+- Persistent login state using `shared_preferences`.
+- Bottom navigation with Dashboard, Assignments and Schedule.
+- Reusable UI utilities and services.
+
+## Architecture
+
+- `lib/screens/` — routeable screens and top-level UI pages.
+- `lib/navigations/` — navigation widgets (bottom nav).
+- `lib/services/` — business logic and external integrations (auth, storage).
+- `lib/utils/` — shared constants and helpers (colors, styles).
+- `lib/widgets/` — reusable UI components (form fields, buttons).
+
+Design choices:
+- Clear separation between UI and service logic ensures testability.
+- Small, focused widgets increase reusability across screens.
+
+## Setup
+
+1. Ensure Flutter is installed: https://docs.flutter.dev/get-started/install
+2. From the project root:
+
+```powershell
+cd alu_academic_assistant
+flutter pub get
+flutter run
+```
+
+## Contribution Guidelines
+
+- Use feature branches and include meaningful commit messages.
+- Keep widget methods small and prefer composition over large widgets.
+- Document non-obvious design decisions with inline comments.
+
+## Notes for Reviewers
+
+- The app uses a mocked `AuthService` for demo purposes. Replace with real
+	backend calls when integrating with an API.
+- Colors live in `lib/utils/alu_colors.dart` and should be used across the app
+	to enforce the ALU palette.
+
+---
+If you'd like, I can continue and:
+- Add `lib/widgets/CustomTextField` and refactor forms to use it.
+- Run `flutter analyze` and fix warnings.
+=======
 ### Prerequisites
 - Flutter SDK (version 3.0 or higher)
 - Dart (included with Flutter)
@@ -292,3 +468,4 @@ Each team member should work on their assigned component:
 - **[Team Member 3]**: [Component]
 
 All contributions must follow the code quality standards outlined in the rubric.
+>>>>>>> 0a9c706323e33767eb98faefbafff6f7ee0d901a

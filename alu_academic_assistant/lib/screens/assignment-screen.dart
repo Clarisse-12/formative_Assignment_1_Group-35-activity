@@ -3,6 +3,8 @@ import '../models/assignment.dart';
 import '../widget/assignments_tile.dart';
 import 'add_assignment_screen.dart';
 
+// This screen is a placeholder for the Assignments screen. You can expand it with actual functionality later.
+
 class AssignmentsScreen extends StatefulWidget {
   const AssignmentsScreen({super.key});
 
