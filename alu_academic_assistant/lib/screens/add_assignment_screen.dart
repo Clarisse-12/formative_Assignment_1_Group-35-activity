@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../constants/colors.dart';
+import '../utils/alu_colors.dart';
 import '../models/assignment.dart';
 
 /// Add/Edit Assignment Screen
-/// 
+///
 /// This screen provides a form interface for users to create new assignments
 /// or edit existing ones. It includes input validation, date/time pickers,
 /// and a priority selection dropdown.
-/// 
+///
 /// The form validates:
 /// - Title is not empty
 /// - Course name is not empty
 /// - Due date is selected and not in the past
-/// 
+///
 /// Returns to the previous screen with the created/edited Assignment object.
 
 class AddAssignmentScreen extends StatefulWidget {
   /// Optional assignment to edit - if null, the form will be for creating a new assignment
   final Assignment? assignmentToEdit;
 
-  const AddAssignmentScreen({
-    super.key,
-    this.assignmentToEdit,
-  });
+  const AddAssignmentScreen({super.key, this.assignmentToEdit});
 
   @override
   State<AddAssignmentScreen> createState() => _AddAssignmentScreenState();
@@ -59,9 +56,9 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   /// High = Red, Medium = Orange, Low = Green
   /// Helps users quickly identify assignment urgency
   static const Map<String, Color> _priorityColors = {
-    'High': Color(0xFFDC3545),    // Red
-    'Medium': Color(0xFFFDB827),  // Yellow/Gold
-    'Low': Color(0xFF28A745),      // Green
+    'High': Color(0xFFDC3545), // Red
+    'Medium': Color(0xFFFDB827), // Yellow/Gold
+    'Low': Color(0xFF28A745), // Green
   };
 
   @override
@@ -71,8 +68,12 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
     // Initialize text controllers
     // If editing an existing assignment, pre-populate the fields
     if (widget.assignmentToEdit != null) {
-      _titleController = TextEditingController(text: widget.assignmentToEdit!.title);
-      _courseController = TextEditingController(text: widget.assignmentToEdit!.courseName);
+      _titleController = TextEditingController(
+        text: widget.assignmentToEdit!.title,
+      );
+      _courseController = TextEditingController(
+        text: widget.assignmentToEdit!.courseName,
+      );
       _selectedDueDate = widget.assignmentToEdit!.dueDate;
       _selectedPriority = widget.assignmentToEdit!.priority;
     } else {
@@ -95,7 +96,7 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   }
 
   /// Opens a date picker dialog to select the assignment due date
-  /// 
+  ///
   /// The date picker:
   /// - Shows a calendar interface
   /// - Prevents selecting dates in the past
@@ -133,12 +134,12 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   }
 
   /// Validates the form and submits the assignment
-  /// 
+  ///
   /// Validation checks:
   /// 1. Title is provided (required)
   /// 2. Course name is provided (required)
   /// 3. Due date is set (required)
-  /// 
+  ///
   /// If all validations pass, creates/updates the Assignment object
   /// and returns it to the previous screen via Navigator.pop()
   void _submitForm() {
@@ -146,7 +147,8 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
     if (_formKey.currentState!.validate()) {
       // Generate unique ID for new assignments
       // Use timestamp + random number for simple uniqueness
-      final assignmentId = widget.assignmentToEdit?.id ??
+      final assignmentId =
+          widget.assignmentToEdit?.id ??
           'assign_${DateTime.now().millisecondsSinceEpoch}';
 
       // Create a new Assignment object with form values
@@ -398,18 +400,15 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   }
 
   /// Helper method to build consistent form sections
-  /// 
+  ///
   /// Creates a section with a label and form field with consistent styling
-  /// 
+  ///
   /// Parameters:
   /// - [label]: The label text to display above the field
   /// - [child]: The form widget (TextFormField, DropdownButton, etc.)
-  /// 
+  ///
   /// Returns a Column widget with the label and child widget
-  Widget _buildFormSection({
-    required String label,
-    required Widget child,
-  }) {
+  Widget _buildFormSection({required String label, required Widget child}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -430,14 +429,14 @@ class _AddAssignmentScreenState extends State<AddAssignmentScreen> {
   }
 
   /// Helper method to build consistent input field decorations
-  /// 
+  ///
   /// Creates a consistent TextFormField decoration across all form fields
   /// with ALU color scheme and styling
-  /// 
+  ///
   /// Parameters:
   /// - [hintText]: Placeholder text to guide user input
   /// - [icon]: Icon to display inside the text field
-  /// 
+  ///
   /// Returns an InputDecoration object with consistent styling
   InputDecoration _buildInputDecoration({
     required String hintText,

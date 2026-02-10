@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../logic/schedule_logic.dart';
 import '../models/session.dart';
 import '../widget/session_form_screen.dart';
 
 class ScheduleScreen extends StatefulWidget {
-import 'package:intl/intl.dart';
-// This screen is a placeholder for the Schedule screen. It displays the current date in a formatted way. You can expand it with actual scheduling functionality later.
-class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
 
   @override
@@ -14,7 +12,7 @@ class ScheduleScreen extends StatelessWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-// build: Displays the current date in a formatted way using the `intl` package. The date is shown below the "Schedule" title. You can expand this screen later to include actual scheduling functionality, such as a calendar view or a list of upcoming events.
+  // build: Displays the current date in a formatted way using the `intl` package. The date is shown below the "Schedule" title. You can expand this screen later to include actual scheduling functionality, such as a calendar view or a list of upcoming events.
   @override
   Widget build(BuildContext context) {
     final sessions = getWeeklySessions(DateTime.now());
@@ -56,8 +54,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
                 return Card(
                   color: const Color(0xFF122B5A),
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
@@ -82,7 +82,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           const SizedBox(height: 4),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 2),
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.amber.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(8),
@@ -115,9 +117,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             final updated = await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => SessionFormScreen(
-                                  sessionToEdit: session,
-                                ),
+                                builder: (_) =>
+                                    SessionFormScreen(sessionToEdit: session),
                               ),
                             );
                             if (updated != null) {
@@ -126,7 +127,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           },
                         ),
                         IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.redAccent),
+                          icon: const Icon(
+                            Icons.delete,
+                            color: Colors.redAccent,
+                          ),
                           onPressed: () {
                             setState(() => deleteSession(index));
                           },
@@ -137,24 +141,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 );
               },
             ),
-    final now = DateTime.now();
-    final formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
-// The UI consists of a centered column with the title "Schedule" and the current date displayed below it. The date is formatted to show the day of the week, month, day, and year for better readability.
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Schedule',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'Today: $formattedDate',
-            style: const TextStyle(fontSize: 16),
-          ),
-        ],
-      ),
     );
   }
 }
