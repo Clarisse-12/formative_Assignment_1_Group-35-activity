@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import '../utils/alu_colors.dart';
 import '../services/auth_service.dart';
 import 'login_screen.dart';
+import '../widgets/custom_text_field.dart';
+
+// This screen allows new users to create an account. It includes fields for the student's name, email, password, and password confirmation. It also has validation to ensure that the input is correct before attempting to sign up.
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -9,7 +12,7 @@ class SignUpScreen extends StatefulWidget {
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
-
+// _SignUpScreenState: Manages the state of the sign-up form, including text controllers for each input field, loading state, and password visibility toggles. It handles the sign-up logic by calling the AuthService and provides feedback to the user based on the success or failure of the sign-up attempt. The UI is built using a combination of standard Flutter widgets and a custom `CustomTextField` for consistent styling.
 class _SignUpScreenState extends State<SignUpScreen> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -20,7 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _isLoading = false;
   bool _obscurePassword = true;
   bool _obscureRepeatPassword = true;
-
+// dispose: Clean up the text controllers when the widget is disposed to prevent memory leaks.
   @override
   void dispose() {
     _nameController.dispose();
@@ -29,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _repeatPasswordController.dispose();
     super.dispose();
   }
-
+// _handleSignUp: Validates the form, shows a loading indicator, and calls the AuthService to attempt sign-up. It handles success by showing a success message and navigating to the LoginScreen, and failure by showing an error message.
   Future<void> _handleSignUp() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -42,9 +45,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     setState(() => _isLoading = false);
-
+// Check if the widget is still mounted before trying to navigate or show a snackbar, to avoid errors if the user has navigated away.
     if (!mounted) return;
-
+// If sign-up is successful, show a success message and navigate to the LoginScreen. If it fails, show an error message using a SnackBar.
     if (result['success']) {
       // Navigate to Login Screen
       ScaffoldMessenger.of(context).showSnackBar(
@@ -59,14 +62,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } else {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(result['message']),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text(result['message']), backgroundColor: Colors.red),
       );
     }
   }
-
+// _navigateToLogin: Navigates the user back to the Login screen when they tap the "Already have an account? Login" link. It uses `pushReplacement` to prevent the user from going back to the Sign Up screen with the back button, which is a common pattern for authentication flows.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,11 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     color: ALUColors.accent,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
-                    Icons.school,
-                    size: 40,
-                    color: ALUColors.primary,
-                  ),
+                  child: Icon(Icons.school, size: 40, color: ALUColors.primary),
                 ),
                 const SizedBox(height: 30),
                 // Title
@@ -105,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 40),
                 // Student Name Field
-                _buildTextField(
+                CustomTextField(
                   controller: _nameController,
                   label: 'Student Name',
                   hint: 'Enter your full name',
@@ -119,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 20),
                 // Email Field
-                _buildTextField(
+                CustomTextField(
                   controller: _emailController,
                   label: 'Email',
                   hint: 'Enter your email',
@@ -137,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 20),
                 // Password Field
-                _buildTextField(
+                CustomTextField(
                   controller: _passwordController,
                   label: 'Password',
                   hint: 'Enter your password',
@@ -159,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 20),
                 // Repeat Password Field
-                _buildTextField(
+                CustomTextField(
                   controller: _repeatPasswordController,
                   label: 'Repeat Password',
                   hint: 'Confirm your password',
@@ -167,7 +163,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   isPassword: true,
                   obscureText: _obscureRepeatPassword,
                   onToggleVisibility: () {
-                    setState(() => _obscureRepeatPassword = !_obscureRepeatPassword);
+                    setState(
+                      () => _obscureRepeatPassword = !_obscureRepeatPassword,
+                    );
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -220,58 +218,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    required IconData icon,
-    bool isPassword = false,
-    bool obscureText = false,
-    VoidCallback? onToggleVisibility,
-    TextInputType keyboardType = TextInputType.text,
-    String? Function(String?)? validator,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: controller,
-          obscureText: obscureText,
-          keyboardType: keyboardType,
-          validator: validator,
-          style: const TextStyle(color: Colors.black),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: const TextStyle(color: Color(0xFFB0B0B0)),
-            prefixIcon: Icon(icon, color: ALUColors.accent),
-            suffixIcon: isPassword
-                ? IconButton(
-                    icon: Icon(
-                      obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: ALUColors.accent,
-                    ),
-                    onPressed: onToggleVisibility,
-                  )
-                : null,
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsets.symmetric(vertical: 16),
-          ),
-        ),
-      ],
-    );
-  }
+  // Navigate to Login Screen
 }

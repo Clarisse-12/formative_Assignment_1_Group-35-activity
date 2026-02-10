@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'login_screen.dart';
-
+// This screen is the main dashboard that users see after logging in. It includes a logout button in the app bar.
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
       MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
-
+// build: Displays a simple dashboard with a logout button. The logout button calls the `_logout` method, which logs the user out and navigates back to the LoginScreen.
   @override
   Widget build(BuildContext context) {
     return Scaffold(

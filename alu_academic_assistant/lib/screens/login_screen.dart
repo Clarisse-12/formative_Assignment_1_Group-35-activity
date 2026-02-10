@@ -3,14 +3,16 @@ import '../utils/alu_colors.dart';
 import '../services/auth_service.dart';
 import 'signup_screen.dart';
 import '../navigations/bottom-navigation.dart';
+import '../widgets/custom_text_field.dart';
 
+// LoginScreen: The main entry point for users to log in. It includes form validation, loading state, and error handling. It also provides a link to the Sign Up screen.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
-
+// _LoginScreenState: Manages the state of the login form, including text controllers, loading state, and password visibility. It handles the login logic and navigation to the Sign Up screen. The UI is built using a combination of standard Flutter widgets and a custom `CustomTextField` for consistent styling.
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -18,14 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final _authService = AuthService();
   bool _isLoading = false;
   bool _obscurePassword = true;
-
+// dispose: Clean up the text controllers when the widget is disposed to prevent memory leaks.
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
-
+// _handleLogin: Validates the form, shows a loading indicator, and calls the AuthService to attempt login. It handles success by navigating to the main app and failure by showing an error message.
   Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -35,11 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
       email: _emailController.text.trim(),
       password: _passwordController.text,
     );
-
+// After the login attempt, we stop showing the loading indicator regardless of success or failure.
     setState(() => _isLoading = false);
-
+// Check if the widget is still mounted before trying to navigate or show a snackbar, to avoid errors if the user has navigated away.
     if (!mounted) return;
-
+// If login is successful, navigate to the app home (bottom navigation / dashboard). If it fails, show an error message using a SnackBar.
     if (result['success']) {
       // Navigate to the app home (bottom navigation / dashboard)
       Navigator.of(context).pushReplacement(
@@ -48,20 +50,17 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       // Show error message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(result['message']),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text(result['message']), backgroundColor: Colors.red),
       );
     }
   }
-
+// _navigateToSignUp: Navigates the user to the Sign Up screen when they tap the "Sign Up" link. It uses `pushReplacement` to prevent the user from going back to the Login screen with the back button, which is a common pattern for authentication flows.
   void _navigateToSignUp() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => const SignUpScreen()),
     );
   }
-
+// build: Displays the login form with email and password fields, a login button, and a link to the Sign Up screen. It uses the `CustomTextField` widget for consistent styling of the input fields. The login button shows a loading indicator when the login process is in progress.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const SizedBox(height: 50),
 
-                // Logo Circle
+                // Logo
                 Container(
                   width: 80,
                   height: 80,
@@ -83,11 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: ALUColors.accent,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
-                    Icons.school,
-                    size: 40,
-                    color: ALUColors.primary,
-                  ),
+                  child: Icon(Icons.school, size: 40, color: ALUColors.primary),
                 ),
 
                 const SizedBox(height: 30),
@@ -106,16 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const Text(
                   'Login to your account',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
                 ),
 
                 const SizedBox(height: 50),
 
                 // Email Field
-                _buildTextField(
+                CustomTextField(
                   controller: _emailController,
                   label: 'Email',
                   hint: 'Enter your email',
@@ -135,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
 
                 // Password Field
-                _buildTextField(
+                CustomTextField(
                   controller: _passwordController,
                   label: 'Password',
                   hint: 'Enter your password',
@@ -195,10 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const Text(
                       'Don\'t have an account? ',
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     GestureDetector(
                       onTap: _navigateToSignUp,
@@ -221,58 +210,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    required IconData icon,
-    bool isPassword = false,
-    bool obscureText = false,
-    VoidCallback? onToggleVisibility,
-    TextInputType keyboardType = TextInputType.text,
-    String? Function(String?)? validator,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: controller,
-          obscureText: obscureText,
-          keyboardType: keyboardType,
-          validator: validator,
-          style: const TextStyle(color: Colors.black),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: const TextStyle(color: Color(0xFFB0B0B0)),
-            prefixIcon: Icon(icon, color: ALUColors.accent),
-            suffixIcon: isPassword
-                ? IconButton(
-                    icon: Icon(
-                      obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: ALUColors.accent,
-                    ),
-                    onPressed: onToggleVisibility,
-                  )
-                : null,
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsets.symmetric(vertical: 16),
-          ),
-        ),
-      ],
-    );
-  }
+  // Field implementation extracted to `CustomTextField` in `lib/widgets`.
 }
