@@ -1,4 +1,4 @@
-# 📱 ALU Academic Assistant
+# ALU Academic Assistant
 
 <div align="center">
 
@@ -8,30 +8,30 @@
 
 **A comprehensive mobile application for African Leadership University students to manage their academic journey**
 
-### 🎥 [Watch Demo Video](https://youtu.be/pXrKnm4xWY8)
+### [Watch Demo Video](https://youtu.be/pXrKnm4xWY8)
 
-[Features](#-features) • [Installation](#-setup-and-installation) • [Architecture](#-project-architecture) • [Documentation](#-file-documentation)
+[Features](#features) • [Installation](#setup-and-installation) • [Architecture](#project-architecture) • [Documentation](#file-documentation)
 
 </div>
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Project Overview](#-project-overview)
-- [Features](#-features)
-- [Project Architecture](#-project-architecture)
-- [File Documentation](#-file-documentation)
-- [Technical Stack](#-technical-stack)
-- [Setup and Installation](#-setup-and-installation)
-- [How to Use](#-how-to-use-the-app)
-- [Code Quality Standards](#-code-quality-standards)
-- [Team Collaboration](#-team-collaboration)
-- [Development Guidelines](#-development-guidelines)
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Project Architecture](#project-architecture)
+- [File Documentation](#file-documentation)
+- [Technical Stack](#technical-stack)
+- [Setup and Installation](#setup-and-installation)
+- [How to Use](#how-to-use-the-app)
+- [Code Quality Standards](#code-quality-standards)
+- [Team Collaboration](#team-collaboration)
+- [Development Guidelines](#development-guidelines)
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 ### Problem Statement
 
@@ -48,16 +48,16 @@ ALU students face challenges in managing multiple academic responsibilities incl
 
 ### Key Benefits
 
-- 📊 **Visual Analytics**: Track attendance percentage and academic week progress
-- ⏰ **Smart Reminders**: Identify urgent assignments and upcoming deadlines
-- 📅 **Unified Calendar**: Manage all academic sessions in one place
-- 🎨 **Professional UI**: ALU-branded interface with smooth animations
+- **Visual Analytics**: Track attendance percentage and academic week progress
+- **Smart Reminders**: Identify urgent assignments and upcoming deadlines
+- **Unified Calendar**: Manage all academic sessions in one place
+- **Professional UI**: ALU-branded interface with smooth animations
 
 ---
 
-## ✨ Features
+## Features
 
-### 🏠 Home Dashboard
+### Home Dashboard
 
 The dashboard serves as the central hub for academic oversight:
 
@@ -102,7 +102,7 @@ The dashboard serves as the central hub for academic oversight:
 - Academic week number (1-15 based on term start)
 - Formatted date display (e.g., "Monday, Feb 10")
 
-### 📝 Assignment Management System
+### Assignment Management System
 
 #### **Assignment List View** (`assignment-screen.dart`)
 
@@ -140,7 +140,7 @@ The dashboard serves as the central hub for academic oversight:
   - "Due tomorrow" for next day
   - "Due [date]" for future dates
 
-### 📅 Academic Session Scheduling
+### Academic Session Scheduling
 
 #### **Weekly Schedule View** (`schedule-screen.dart`)
 
@@ -178,7 +178,7 @@ The dashboard serves as the central hub for academic oversight:
   - This week's sessions
   - All sessions
 
-### 🎓 Attendance Tracking
+### Attendance Tracking
 
 #### **Attendance Logic** (`schedule_logic.dart`)
 
@@ -200,7 +200,7 @@ The dashboard serves as the central hub for academic oversight:
 
 ---
 
-## 🏗 Project Architecture
+## Project Architecture
 
 ### Folder Structure
 
@@ -308,7 +308,7 @@ AuthWrapper (checks login status)
 
 ---
 
-## 📄 File Documentation
+## File Documentation
 
 ### Core Application Files
 
@@ -832,7 +832,7 @@ Container(
 
 ---
 
-## 🛠 Technical Stack
+## Technical Stack
 
 ### Core Technologies
 
@@ -930,7 +930,7 @@ flutter:
 
 ---
 
-## 🚀 Setup and Installation
+## Setup and Installation
 
 ### Prerequisites
 
@@ -1218,7 +1218,7 @@ defaultConfig {
 
 ---
 
-## 📖 How to Use the App
+## How to Use the App
 
 ### Initial Setup
 
@@ -1429,7 +1429,7 @@ defaultConfig {
 
 ---
 
-## 📐 Code Quality Standards
+## Code Quality Standards
 
 ### Naming Conventions
 
@@ -1771,7 +1771,7 @@ Future<void> loadData() async {
 
 ---
 
-## 👥 Team Collaboration
+## Team Collaboration
 
 ### Group Members
 
@@ -1980,7 +1980,7 @@ refactor(widgets): extract reusable card component
 
 ---
 
-## 🔧 Development Guidelines
+## Development Guidelines
 
 ### Contributing to the Project
 
@@ -2327,13 +2327,13 @@ class Assignment {
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License. See `LICENSE` file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **African Leadership University** for inspiration and support
 - **Flutter Team** for the amazing framework
@@ -2342,7 +2342,7 @@ This project is licensed under the MIT License. See `LICENSE` file for details.
 
 ---
 
-## 📞 Contact & Support
+## Contact & Support
 
 - **Repository**: https://github.com/Clarisse-12/formative_Assignment_1_Group-35-activity
 - **Issues**: https://github.com/Clarisse-12/formative_Assignment_1_Group-35-activity/issues
@@ -2352,9 +2352,9 @@ This project is licensed under the MIT License. See `LICENSE` file for details.
 
 <div align="center">
 
-**Built with ❤️ by Group 35 for ALU Students**
+**Built with love by Group 35 for ALU Students**
 
-⭐ Star this repository if you find it helpful!
+Star this repository if you find it helpful!
 
 </div>
 flutter test
