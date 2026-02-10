@@ -1,12 +1,142 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
+import '../logic/schedule_logic.dart';
+import '../models/session.dart';
+import '../widget/session_form_screen.dart';
+
+class ScheduleScreen extends StatefulWidget {
 import 'package:intl/intl.dart';
 // This screen is a placeholder for the Schedule screen. It displays the current date in a formatted way. You can expand it with actual scheduling functionality later.
 class ScheduleScreen extends StatelessWidget {
   const ScheduleScreen({super.key});
+
+  @override
+  State<ScheduleScreen> createState() => _ScheduleScreenState();
+}
+
+class _ScheduleScreenState extends State<ScheduleScreen> {
 // build: Displays the current date in a formatted way using the `intl` package. The date is shown below the "Schedule" title. You can expand this screen later to include actual scheduling functionality, such as a calendar view or a list of upcoming events.
   @override
   Widget build(BuildContext context) {
+    final sessions = getWeeklySessions(DateTime.now());
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF0A1A3A),
+      appBar: AppBar(
+        title: const Text(
+          'Weekly Schedule',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color(0xFF0A1A3A),
+        elevation: 0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber,
+        child: const Icon(Icons.add, color: Colors.black),
+        onPressed: () async {
+          final newSession = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const SessionFormScreen()),
+          );
+          if (newSession != null) {
+            setState(() => addSession(newSession));
+          }
+        },
+      ),
+      body: sessions.isEmpty
+          ? const Center(
+              child: Text(
+                'No sessions scheduled',
+                style: TextStyle(color: Colors.white70, fontSize: 16),
+              ),
+            )
+          : ListView.builder(
+              itemCount: sessions.length,
+              itemBuilder: (context, index) {
+                final session = sessions[index];
+
+                return Card(
+                  color: const Color(0xFF122B5A),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: ListTile(
+                    leading: const Icon(Icons.school, color: Colors.amber),
+                    title: Text(
+                      session.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${session.startTime} - ${session.endTime}',
+                            style: const TextStyle(color: Colors.white70),
+                          ),
+                          const SizedBox(height: 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.amber.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              session.sessionType,
+                              style: const TextStyle(
+                                color: Colors.amber,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Checkbox(
+                          value: session.isPresent,
+                          activeColor: Colors.amber,
+                          checkColor: Colors.black,
+                          onChanged: (_) {
+                            setState(() => toggleAttendance(session));
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.edit, color: Colors.white),
+                          onPressed: () async {
+                            final updated = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => SessionFormScreen(
+                                  sessionToEdit: session,
+                                ),
+                              ),
+                            );
+                            if (updated != null) {
+                              setState(() => editSession(index, updated));
+                            }
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.redAccent),
+                          onPressed: () {
+                            setState(() => deleteSession(index));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
     final now = DateTime.now();
     final formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
 // The UI consists of a centered column with the title "Schedule" and the current date displayed below it. The date is formatted to show the day of the week, month, day, and year for better readability.
