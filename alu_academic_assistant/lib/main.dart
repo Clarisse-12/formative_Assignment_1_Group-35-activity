@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './screens/auth_wrapper.dart';
+import './screens/login_screen.dart';
 import './navigations/bottom-navigation.dart';
 import './screens/assignment-screen.dart';
 import './screens/schedule-screen.dart';
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
       ),
-      home: const BottonNav(),
+      home: const AuthWrapper(),
     ); 
   }
 }
